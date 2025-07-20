@@ -1,0 +1,47 @@
+{
+  "name": "rishabhmhjn.com",
+  "root": "projects/rishabhmhjn.com",
+  "projectType": "application",
+  "sourceRoot": "projects/rishabhmhjn.com/src",
+  "targets": {
+    "clean": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "rm -rf dist",
+        "cwd": "projects/rishabhmhjn.com"
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "astro build",
+        "cwd": "projects/rishabhmhjn.com",
+        "parallel": false
+      }
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "astro dev",
+        "cwd": "projects/rishabhmhjn.com",
+        "parallel": false
+      }
+    },
+    "preview": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "astro preview",
+        "cwd": "projects/rishabhmhjn.com",
+        "parallel": false
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm run lint",
+        "cwd": "projects/rishabhmhjn.com"
+      }
+    }
+  },
+  "tags": []
+}

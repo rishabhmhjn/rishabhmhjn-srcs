@@ -16,12 +16,15 @@ coverage/
 .env
 .env.local
 .env.*.local
+.env.production
+
 
 # Logs
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
 # IDE files
 .vscode/
@@ -41,3 +44,7 @@ Thumbs.db
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
 .angular
+
+# astro
+# generated types
+.astro/
