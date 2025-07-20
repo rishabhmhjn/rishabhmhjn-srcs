@@ -7,7 +7,7 @@ import starlightBlog from 'starlight-blog';
 export default defineConfig({
   srcDir: 'app/src',
   publicDir: 'app/public',
-  outDir: '../../dist/apps/rishabhmhjn.com',
+  outDir: '../../dist/projects/rishabhmhjn.com',
   site: 'https://rishabhmhjn.com',
   integrations: [
     starlight({
