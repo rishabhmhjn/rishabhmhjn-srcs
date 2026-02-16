@@ -41,8 +41,19 @@
       "options": {
         "targetName": "lint"
       }
+    },
+    {
+      "plugin": "@nx/rollup/plugin",
+      "options": {
+        "buildTargetName": "build",
+        "buildDepsTargetName": "build-deps",
+        "watchDepsTargetName": "watch-deps"
+      }
     }
   ],
+  "release": {
+    "projects": ["kaomoji"]
+  },
   "generators": {
     "@nx/angular:application": {
       "e2eTestRunner": "playwright",

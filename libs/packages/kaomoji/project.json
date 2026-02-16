@@ -1,0 +1,15 @@
+{
+  "name": "kaomoji",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/packages/kaomoji/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "nx-release-publish": {
+      "command": "npm publish {args.registry} --access public",
+      "options": {
+        "cwd": "dist/packages/kaomoji"
+      }
+    }
+  }
+}

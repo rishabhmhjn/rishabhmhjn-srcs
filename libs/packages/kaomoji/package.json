@@ -1,0 +1,13 @@
+{
+  "name": "kaomoji",
+  "version": "0.2.1",
+  "main": "./index.cjs",
+  "module": "./index.js",
+  "bin": {
+    "kaomoji": "./cli.cjs.js"
+  },
+  "dependencies": {
+    "@clack/prompts": "^1.0.1",
+    "commander": "^14.0.3"
+  }
+}
