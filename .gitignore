@@ -48,3 +48,6 @@ Thumbs.db
 # astro
 # generated types
 .astro/
+
+# claude
+.claude/settings.local.json

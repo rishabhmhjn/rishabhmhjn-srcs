@@ -1,4 +1,5 @@
 {
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "name": "rishabhmhjn.com",
   "root": "projects/rishabhmhjn.com",
   "projectType": "application",
