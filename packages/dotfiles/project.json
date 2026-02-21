@@ -1,0 +1,13 @@
+{
+  "name": "dotfiles",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "targets": {
+    "init": {
+      "command": "bash scripts/init.sh",
+      "options": {
+        "cwd": "{projectRoot}"
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "@rishabhmhjn/dotfiles",
+  "version": "0.1.0",
+  "private": true,
+  "bin": {
+    "dotfiles": "scripts/init.sh"
+  },
+  "scripts": {
+    "init": "bash scripts/init.sh"
+  }
+}
