@@ -8,6 +8,7 @@ DOTFILES="$HOME/.dotfiles/current"
 [[ -f "$DOTFILES/.aliases" ]]     && source "$DOTFILES/.aliases"
 [[ -f "$DOTFILES/.functions" ]]   && source "$DOTFILES/.functions"
 [[ -f "$DOTFILES/.zsh-plugins" ]] && source "$DOTFILES/.zsh-plugins"
+[[ -f "$DOTFILES/.git-flow-completions" ]] && source "$DOTFILES/.git-flow-completions"
 
 # History
 export HISTFILESIZE=10000

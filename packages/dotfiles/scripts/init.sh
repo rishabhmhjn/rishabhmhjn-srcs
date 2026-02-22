@@ -21,6 +21,16 @@ mkdir -p "$RELEASE_DIR"
 # Copy all dotfiles into the release dir (including dot-prefixed files)
 cp "$DOTFILES_SOURCE"/.[!.]* "$RELEASE_DIR/"
 
+# Generate git-flow completions into the release if git-flow is available
+if command -v git-flow >/dev/null 2>&1; then
+  if git-flow completion zsh >"$RELEASE_DIR/.git-flow-completions" 2>/dev/null; then
+    echo "==> Generated: $RELEASE_DIR/.git-flow-completions"
+  else
+    rm -f "$RELEASE_DIR/.git-flow-completions"
+    echo "==> Skipping git-flow completions (unsupported command output)"
+  fi
+fi
+
 # Copy all vendored plugins into the release dir
 PLUGINS_DIR="$RELEASE_DIR/plugins"
 mkdir -p "$PLUGINS_DIR"
