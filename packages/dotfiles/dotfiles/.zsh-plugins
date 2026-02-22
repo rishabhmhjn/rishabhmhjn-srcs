@@ -1,0 +1,21 @@
+# zsh plugin sources.
+# List plugin entry files relative to the release plugins root:
+#   ~/.dotfiles/current/plugins/
+# Add one entry per plugin entrypoint file.
+# Format:
+#   "<vendor-directory>/<script-file>.zsh"
+# Example:
+#   "zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+# Missing files are skipped safely.
+
+typeset -a plugin_entries=(
+  "zsh-autosuggestions/zsh-autosuggestions.zsh"
+  "nx-completion/nx-completion.plugin.zsh"
+)
+
+plugins_root="${DOTFILES:-$HOME/.dotfiles/current}/plugins"
+
+for entry in "${plugin_entries[@]}"; do
+  plugin_file="$plugins_root/$entry"
+  [[ -f "$plugin_file" ]] && source "$plugin_file"
+done

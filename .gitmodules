@@ -1,0 +1,6 @@
+[submodule "packages/dotfiles/vendors/zsh-autosuggestions"]
+	path = packages/dotfiles/vendors/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule "packages/dotfiles/vendors/nx-completion"]
+	path = packages/dotfiles/vendors/nx-completion
+	url = https://github.com/jscutlery/nx-completion

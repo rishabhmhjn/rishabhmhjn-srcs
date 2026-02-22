@@ -10,6 +10,7 @@ while [ -L "$SOURCE" ]; do
 done
 SCRIPT_DIR="$(cd "$(dirname "$SOURCE")" && pwd)"
 DOTFILES_SOURCE="$SCRIPT_DIR/../dotfiles"
+VENDORS_SOURCE="$SCRIPT_DIR/../vendors"
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 RELEASE_DIR="$HOME/.dotfiles/releases/$TIMESTAMP"
 CURRENT_LINK="$HOME/.dotfiles/current"
@@ -19,6 +20,19 @@ mkdir -p "$RELEASE_DIR"
 
 # Copy all dotfiles into the release dir (including dot-prefixed files)
 cp "$DOTFILES_SOURCE"/.[!.]* "$RELEASE_DIR/"
+
+# Copy all vendored plugins into the release dir
+PLUGINS_DIR="$RELEASE_DIR/plugins"
+mkdir -p "$PLUGINS_DIR"
+if [ -d "$VENDORS_SOURCE" ]; then
+  echo "==> Copying plugins from: $VENDORS_SOURCE"
+  for plugin in "$VENDORS_SOURCE"/*; do
+    [ -d "$plugin" ] || continue
+    plugin_name="$(basename "$plugin")"
+    cp -R "$plugin" "$PLUGINS_DIR/$plugin_name"
+    echo "    Copied plugin: $plugin_name"
+  done
+fi
 
 # Update the current symlink to point to the new release
 ln -sfn "$RELEASE_DIR" "$CURRENT_LINK"
