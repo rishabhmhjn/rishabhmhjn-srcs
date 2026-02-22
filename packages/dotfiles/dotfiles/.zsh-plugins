@@ -11,6 +11,7 @@
 typeset -a plugin_entries=(
   "zsh-autosuggestions/zsh-autosuggestions.zsh"
   "nx-completion/nx-completion.plugin.zsh"
+  "zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 )
 
 plugins_root="${DOTFILES:-$HOME/.dotfiles/current}/plugins"

@@ -4,3 +4,6 @@
 [submodule "packages/dotfiles/vendors/nx-completion"]
 	path = packages/dotfiles/vendors/nx-completion
 	url = https://github.com/jscutlery/nx-completion
+[submodule "packages/dotfiles/vendors/zsh-syntax-highlighting"]
+	path = packages/dotfiles/vendors/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
