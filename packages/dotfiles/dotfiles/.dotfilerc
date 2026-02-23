@@ -5,22 +5,10 @@
 
 DOTFILES="$HOME/.dotfiles/current"
 
-[[ -f "$DOTFILES/.aliases" ]]     && source "$DOTFILES/.aliases"
-[[ -f "$DOTFILES/.functions" ]]   && source "$DOTFILES/.functions"
-[[ -f "$DOTFILES/.zsh-plugins" ]] && source "$DOTFILES/.zsh-plugins"
-if [[ -n "${ZSH_VERSION:-}" && -s "$DOTFILES/.git-flow-completions" ]]; then
-  # Load git-flow completions after startup compinit calls complete.
-  autoload -Uz add-zsh-hook
-  _dotfiles_source_git_flow_completion_once() {
-    [[ -n "${_DOTFILES_GIT_FLOW_COMPLETION_LOADED:-}" ]] && return
-    whence -w compdef >/dev/null 2>&1 || return
-    source "$DOTFILES/.git-flow-completions"
-    export _DOTFILES_GIT_FLOW_COMPLETION_LOADED=1
-    add-zsh-hook -d precmd _dotfiles_source_git_flow_completion_once 2>/dev/null || true
-  }
-  add-zsh-hook precmd _dotfiles_source_git_flow_completion_once
-  _dotfiles_source_git_flow_completion_once
-fi
+[[ -f "$DOTFILES/.aliases" ]]              && source "$DOTFILES/.aliases"
+[[ -f "$DOTFILES/.functions" ]]            && source "$DOTFILES/.functions"
+[[ -f "$DOTFILES/.zsh-plugins" ]]          && source "$DOTFILES/.zsh-plugins"
+[[ -f "$DOTFILES/.git-flow-completions" ]] && source "$DOTFILES/.git-flow-completions"
 
 # History
 export HISTFILESIZE=10000
