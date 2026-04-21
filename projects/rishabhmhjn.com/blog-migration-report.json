@@ -1,0 +1,127 @@
+[
+  {
+    "slug": "100daysofcode-day-5-shared-styles-in-nx-angular-libraries",
+    "title": "#100daysofcode Day 5: Shared styles in NX #Angular libraries",
+    "date": "2023-03-14",
+    "output": "app/src/content/docs/blog/100daysofcode-day-5-shared-styles-in-nx-angular-libraries.md",
+    "assets": [
+      "app/src/content/docs/blog/assets/2023-03-14-100daysofcode-day-5-shared-styles-in-nx-angular-libraries-01.png",
+      "app/src/content/docs/blog/assets/2023-03-14-100daysofcode-day-5-shared-styles-in-nx-angular-libraries-02.png",
+      "app/src/content/docs/blog/assets/2023-03-14-100daysofcode-day-5-shared-styles-in-nx-angular-libraries-03.png"
+    ]
+  },
+  {
+    "slug": "100daysofcode-day-4-break-in-the-challenge-ng-scaffolding",
+    "title": "#100daysofcode Day 4: Break in the challenge & Ng Scaffolding",
+    "date": "2023-03-13",
+    "output": "app/src/content/docs/blog/100daysofcode-day-4-break-in-the-challenge-ng-scaffolding.md",
+    "assets": [
+      "app/src/content/docs/blog/assets/2023-03-13-100daysofcode-day-4-break-in-the-challenge-ng-scaffolding-01.png",
+      "app/src/content/docs/blog/assets/2023-03-13-100daysofcode-day-4-break-in-the-challenge-ng-scaffolding-02.png",
+      "app/src/content/docs/blog/assets/2023-03-13-100daysofcode-day-4-break-in-the-challenge-ng-scaffolding-03.png"
+    ]
+  },
+  {
+    "slug": "100daysofcode-day-3-shared-eslint-plugin",
+    "title": "#100daysofcode Day 3: Shared eslint-plugin",
+    "date": "2023-03-08",
+    "output": "app/src/content/docs/blog/100daysofcode-day-3-shared-eslint-plugin.md",
+    "assets": [
+      "app/src/content/docs/blog/assets/2023-03-08-100daysofcode-day-3-shared-eslint-plugin-01.png",
+      "app/src/content/docs/blog/assets/2023-03-08-100daysofcode-day-3-shared-eslint-plugin-02.png",
+      "app/src/content/docs/blog/assets/2023-03-08-100daysofcode-day-3-shared-eslint-plugin-03.png"
+    ]
+  },
+  {
+    "slug": "100daysofcode-day-2-nx-monorepo",
+    "title": "#100daysofcode Day 2: Toastmasters, Nx, Commitlint, Husky",
+    "date": "2023-03-07",
+    "output": "app/src/content/docs/blog/100daysofcode-day-2-nx-monorepo.md",
+    "assets": [
+      "app/src/content/docs/blog/assets/2023-03-07-100daysofcode-day-2-nx-monorepo-01.png",
+      "app/src/content/docs/blog/assets/2023-03-07-100daysofcode-day-2-nx-monorepo-02.png",
+      "app/src/content/docs/blog/assets/2023-03-07-100daysofcode-day-2-nx-monorepo-03.png",
+      "app/src/content/docs/blog/assets/2023-03-07-100daysofcode-day-2-nx-monorepo-04.png"
+    ]
+  },
+  {
+    "slug": "100daysofcode-day-1-taking-the-first-step",
+    "title": "#100daysofcode Day 1: Taking the first step",
+    "date": "2023-03-05",
+    "output": "app/src/content/docs/blog/100daysofcode-day-1-taking-the-first-step.md",
+    "assets": [
+      "app/src/content/docs/blog/assets/2023-03-05-100daysofcode-day-1-taking-the-first-step-01.png",
+      "app/src/content/docs/blog/assets/2023-03-05-100daysofcode-day-1-taking-the-first-step-02.jpg"
+    ]
+  },
+  {
+    "slug": "cracking-competitive-exams-is-easier-now-than-before",
+    "title": "Cracking competitive exams is easier now than before",
+    "date": "2022-09-24",
+    "output": "app/src/content/docs/blog/cracking-competitive-exams-is-easier-now-than-before.md",
+    "assets": []
+  },
+  {
+    "slug": "rise-of-shallow-and-desperate-mentors",
+    "title": "Rise of shallow and desperate mentors",
+    "date": "2022-09-24",
+    "output": "app/src/content/docs/blog/rise-of-shallow-and-desperate-mentors.md",
+    "assets": []
+  },
+  {
+    "slug": "amritsar-startup-manifesto",
+    "title": "Amritsar Startup Manifesto",
+    "date": "2020-08-11",
+    "output": "app/src/content/docs/blog/amritsar-startup-manifesto.md",
+    "assets": []
+  },
+  {
+    "slug": "co-working-in-amritsar-cases-for-and-against",
+    "title": "Amritsar Co-working Spaces – Cases For and Against",
+    "date": "2020-08-04",
+    "output": "app/src/content/docs/blog/co-working-in-amritsar-cases-for-and-against.md",
+    "assets": []
+  },
+  {
+    "slug": "levels-of-politeness",
+    "title": "Levels of Politeness – Lessons from Japan",
+    "date": "2020-06-17",
+    "output": "app/src/content/docs/blog/levels-of-politeness.md",
+    "assets": []
+  },
+  {
+    "slug": "tools-and-resources-for-startups",
+    "title": "[WIP] List of Tools and Resources for Startups & Small Businesses 2020",
+    "date": "2020-06-13",
+    "output": "app/src/content/docs/blog/tools-and-resources-for-startups.md",
+    "assets": []
+  },
+  {
+    "slug": "ghost-theme-development-environment-with-docker",
+    "title": "Ghost Theme Development with Docker",
+    "date": "2020-06-07",
+    "output": "app/src/content/docs/blog/ghost-theme-development-environment-with-docker.md",
+    "assets": [
+      "app/src/content/docs/blog/assets/2020-06-07-ghost-theme-development-environment-with-docker-01.png"
+    ]
+  },
+  {
+    "slug": "local-govt-in-punjab-pushing-back-on-online-classes",
+    "title": "Local Govt in Punjab Pushing Back on Online Classes",
+    "date": "2020-05-11",
+    "output": "app/src/content/docs/blog/local-govt-in-punjab-pushing-back-on-online-classes.md",
+    "assets": []
+  },
+  {
+    "slug": "million-dollar-startups-from-tier-2-indian-cities",
+    "title": "Million Dollar SAAS Companies from Tier 2 Cities in India & Statusbrew",
+    "date": "2020-05-10",
+    "output": "app/src/content/docs/blog/million-dollar-startups-from-tier-2-indian-cities.md",
+    "assets": [
+      "app/src/content/docs/blog/assets/2020-05-10-million-dollar-startups-from-tier-2-indian-cities-01.jpeg",
+      "app/src/content/docs/blog/assets/2020-05-10-million-dollar-startups-from-tier-2-indian-cities-02.jpg",
+      "app/src/content/docs/blog/assets/2020-05-10-million-dollar-startups-from-tier-2-indian-cities-03.jpg",
+      "app/src/content/docs/blog/assets/2020-05-10-million-dollar-startups-from-tier-2-indian-cities-04.jpg"
+    ]
+  }
+]

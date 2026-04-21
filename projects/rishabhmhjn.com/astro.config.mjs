@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 
 import starlight from '@astrojs/starlight';
 import starlightBlog from 'starlight-blog';
+import { legacyBlogRedirects } from './legacy-blog-redirects.mjs';
 
 // https://astro.build/config
 export default defineConfig({
@@ -9,6 +10,7 @@ export default defineConfig({
   publicDir: 'app/public',
   outDir: '../../dist/projects/rishabhmhjn.com',
   site: 'https://rishabhmhjn.com',
+  redirects: legacyBlogRedirects,
   integrations: [
     starlight({
       plugins: [starlightBlog()],
