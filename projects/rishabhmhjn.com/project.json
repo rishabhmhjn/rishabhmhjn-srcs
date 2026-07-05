@@ -39,7 +39,7 @@
     "lint": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "npm run lint",
+        "command": "eslint .",
         "cwd": "projects/rishabhmhjn.com"
       }
     }
