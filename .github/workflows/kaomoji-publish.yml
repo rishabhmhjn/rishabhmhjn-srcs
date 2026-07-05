@@ -1,9 +1,12 @@
 name: Publish kaomoji to npm
 
 on:
-  push:
-    tags:
-      - kaomoji-v*.*.*
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: kaomoji tag to publish, for example kaomoji-v0.2.1
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -18,12 +21,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
+          ref: refs/tags/${{ inputs.tag_name }}
           fetch-depth: 0
+
+      - name: Validate tag
+        run: |
+          case "${{ inputs.tag_name }}" in
+            kaomoji-v*.*.*) ;;
+            *)
+              echo "Tag must match kaomoji-v*.*.*"
+              exit 1
+              ;;
+          esac
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
           cache: npm
           registry-url: https://registry.npmjs.org/
 
