@@ -15,6 +15,7 @@ export default defineConfig({
     starlight({
       plugins: [starlightBlog()],
       title: 'rishabhmhjn',
+      pagination: false,
       logo: { src: './app/src/assets/logo.png' },
       tagline:
         'Startups, Tech, SAAS, Amritsar – Tokyo – Prague – Singapore, Social Media, Tourism',
