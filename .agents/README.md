@@ -22,6 +22,10 @@ adding reusable guidance or changing recurring workflows. Use
 `.agents/references/ai-harness.md` for source-of-truth ownership,
 adapter, and placement rules.
 
+Before running `git commit`, use
+`.agents/skills/commit-message/SKILL.md` to validate the exact final
+commit message with commitlint.
+
 ## Placement
 
 | Change type | Put it here |

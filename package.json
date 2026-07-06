@@ -6,7 +6,9 @@
     "clean:cache": "rm -rf .nx/cache .angular/cache",
     "clean:dist": "rm -rf dist",
     "clean:node_modules": "find . -name 'node_modules' -type d -exec rm -rf {} +;",
-    "clean": "npm run clean:cache && npm run clean:dist"
+    "clean": "npm run clean:cache && npm run clean:dist",
+    "commitlint": "commitlint --edit",
+    "prepare": "husky"
   },
   "author": "",
   "license": "MIT",
@@ -20,6 +22,8 @@
     "@angular/compiler-cli": "21.1.4",
     "@angular/language-service": "21.1.4",
     "@astrojs/starlight": "^0.41.3",
+    "@commitlint/cli": "^21.2.0",
+    "@commitlint/config-angular": "^21.2.0",
     "@eslint/js": "^9.39.4",
     "@nx/angular": "23.0.1",
     "@nx/devkit": "23.0.1",
@@ -45,6 +49,7 @@
     "eslint": "^9.39.4",
     "eslint-config-prettier": "^10.0.0",
     "eslint-plugin-playwright": "^2.10.4",
+    "husky": "^9.1.7",
     "jest": "30.4.2",
     "jest-environment-jsdom": "30.4.1",
     "jest-preset-angular": "17.0.0",

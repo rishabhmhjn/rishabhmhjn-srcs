@@ -1,0 +1,7 @@
+module.exports = {
+  extends: ['@commitlint/config-angular'],
+  rules: {
+    'body-max-line-length': [2, 'always', 72],
+    'footer-max-line-length': [2, 'always', 72],
+  },
+};
