@@ -5,13 +5,18 @@
 name: Deploy Astro site to Pages
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'projects/rishabhmhjn.com/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'nx.json'
+      - 'tsconfig.json'
+      - 'tsconfig.base.json'
+      - '.github/workflows/rishabhmhjn.com.yml'
   workflow_dispatch:
-    inputs:
-      deploy_ref:
-        description: Branch or ref to deploy
-        required: true
-        default: main
-        type: string
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -36,8 +41,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: ${{ inputs.deploy_ref }}
       - name: Detect package manager
         id: detect-package-manager
         run: |
