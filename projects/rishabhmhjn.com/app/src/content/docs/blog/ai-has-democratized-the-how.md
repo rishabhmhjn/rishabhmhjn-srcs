@@ -1,45 +1,39 @@
 ---
 title: "AI Has Democratized the How"
 date: 2026-07-06
-description: "AI has made execution knowledge easier to reach. The new advantage belongs to people who know what is worth doing, why it matters, and how to adapt generic answers to their own context."
+description: "AI has made the playbook easier to reach. I think the harder work now is choosing what is worth doing, why it matters, and which parts of a generic answer fit the real situation."
 tags: ["AI", "SAAS"]
 ---
 
-For the longest time, business work was gated by access to the right playbook.
+For the longest time, a lot of business work was gated by access to the right playbook.
 
-- How do we hire and onboard better?
-- How do we prepare for compliance?
-- How do we improve sales follow-ups?
-- How do we standardize daily operations?
-- How do we set up useful software or automation?
+Hiring and onboarding, preparing for compliance, improving sales follow-ups, standardizing daily operations, or setting up useful software were not impossible problems. They were expensive problems.
 
-These were not impossible questions. But they were expensive questions. They needed senior people, consultants, networks, trial and error, or patience to turn scattered documentation into an answer.
+You needed senior people, consultants, the right network, a lot of trial and error, or simply the patience to turn scattered documentation into an answer.
 
-AI has cut that path short.
+AI has cut that path short. I think the HOW is mostly sorted now.
 
-The HOW is mostly sorted now.
+Mostly, because AI will still give you confident nonsense. It will miss context. It will suggest a ten-step process where three steps would do. But the manual is within reach now, even far away from the traditional centers of capital, hiring, and mentorship.
 
-The manual is within reach, even far away from traditional centers of capital, hiring, and mentorship.
+That is a big change.
 
 ## The excuse is changing
 
-For years, "I do not have the right resources" was a believable explanation. Sometimes it was true.
+For years, "I don't have the right resources" was a believable explanation. Many times, it was true.
 
-AI has changed the meaning of that excuse.
+AI is changing the meaning of that excuse.
 
-If someone was genuinely blocked because they did not know how to write a process, set up a workflow, or train staff, AI should help.
+If someone is blocked because they don't know how to write a process, set up a workflow, or train staff, AI should help. It can produce the first draft, explain the unfamiliar parts, and keep refining the answer without getting tired.
 
-If they still feel stuck, the problem may not be resources anymore.
+If they still feel stuck, the missing piece may not be access anymore. It may be clarity.
 
-Maybe the next missing piece is clarity.
+They still have to define the business, choose the customer, take the risk, and carry the responsibility. AI can't make those choices disappear.
 
-Maybe they need to define the business, choose the customer, take the risk, and carry the responsibility.
-
-AI is exposing the difference between people blocked by access and people ready to act once access improves.
+It is exposing the difference between people who were blocked by access and people who are ready to act once access improves. I don't think that distinction was always easy to see before.
 
 ## The how is not the job
 
-AI can suggest:
+AI can give us:
 
 - an HR pipeline
 - a compliance checklist
@@ -48,31 +42,28 @@ AI can suggest:
 - a customer support playbook
 - a software setup
 
-But it does not know your customers, constraints, standards, economics, or appetite for risk.
+Useful work! But it doesn't know our customers, constraints, standards, economics, or appetite for risk.
 
-It can explain how other companies solve a problem. It cannot decide whether that answer fits yours.
+It can explain how other companies solve a problem. It can't decide whether that answer fits ours.
 
-The scarce skill is no longer just knowing the procedure. It is knowing the structure in which the procedure must be applied.
+The scarce skill is no longer just knowing the procedure. It is understanding the structure in which that procedure has to work.
 
-That is where experienced people become more important, not less. They can look at an AI-generated answer and say: this is too complex, too risky, good enough, or solving the wrong problem.
+That is where experienced people become more important, not less. They can look at an AI-generated answer and say: this is too complex, this is too risky, this is good enough, or this is solving the wrong problem.
 
 Execution has become more abundant. Decision quality has not.
 
-## The real advantage
+## What and why are still scarce
 
-When the how becomes widely available, the advantage shifts toward what and why.
+When the how becomes widely available, the advantage moves toward what and why.
 
-- What customer is worth serving?
-- What problem is painful enough?
-- What should be standardized?
-- What should be ignored?
+Choosing the customer worth serving, the problem painful enough to solve, the work that should be standardized, and the distractions that should be ignored is still the real job.
 
 AI can shorten the path, but it does not choose the destination.
 
-This is a positive shift. Too many capable people did not have access to the path. AI gives them leverage, whether they run a shop, factory, agency, SaaS company, or local service business.
+I think this is a positive shift. Too many capable people didn't have access to the path. AI gives them leverage, whether they run a shop, factory, agency, SaaS company, or local service business.
 
 It also raises the bar for honesty.
 
-If the manual is no longer hidden, the better question is: what do you want to build with it?
+The manual is no longer hidden. The next work is to decide what is worth building, adapt the generic answer to the real situation, and take responsibility for the result.
 
-The gate is open now. More people can walk through it.
+The gate is open now. More people can walk through it, and I think we are only beginning to see what they will build.
