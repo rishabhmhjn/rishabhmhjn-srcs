@@ -1,0 +1,87 @@
+---
+import { getCollection } from 'astro:content';
+import PostList from '../components/PostList.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { excerpt, featuredPostIds, postPath, sortPosts } from '../lib/posts';
+
+const posts = sortPosts(await getCollection('posts'));
+const featuredPosts = featuredPostIds
+  .map((id) => posts.find((post) => post.id === id))
+  .filter((post) => post !== undefined);
+const latestPosts = posts.slice(0, 5);
+---
+
+<BaseLayout>
+  <section class="hero">
+    <p class="eyebrow">Rishabh Mahajan</p>
+    <h1>My work is focused on Statusbrew and helping build a stronger tech community in Amritsar.</h1>
+    <div class="hero-links">
+      <a class="button" href="/blog/">Read the blog</a>
+      <a href="https://statusbrew.com/">Statusbrew ↗</a>
+    </div>
+  </section>
+
+  <section id="now" class="section split-section">
+    <div>
+      <p class="section-label">Now</p>
+      <h2>Building software. Creating local connections.</h2>
+    </div>
+    <div class="prose-lead">
+      <p>
+        I spend most of my working time on Statusbrew. In Amritsar, I am interested
+        in creating more opportunities for technologists, founders, and students to
+        meet and learn from one another.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-heading">
+      <div>
+        <p class="section-label">Start here</p>
+        <h2>Selected writing</h2>
+      </div>
+      <a href="/blog/">All writing →</a>
+    </div>
+    <div class="featured-grid">
+      {
+        featuredPosts.map((post, index) => (
+          <article>
+            <span>0{index + 1}</span>
+            <h3><a href={postPath(post)}>{post.data.title}</a></h3>
+            <p>{excerpt(post.data.description, 170)}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-heading">
+      <div>
+        <p class="section-label">Latest</p>
+        <h2>Recent posts</h2>
+      </div>
+      <a href="/rss.xml">Follow via RSS →</a>
+    </div>
+    <PostList posts={latestPosts} compact />
+  </section>
+
+  <section id="about" class="section split-section about-section">
+    <div>
+      <p class="section-label">About</p>
+      <h2>Software, startups, and Amritsar.</h2>
+    </div>
+    <div class="prose-lead">
+      <p>
+        This site is where I write about building internet businesses, technology,
+        and the conditions that help ambitious people build from cities outside the
+        usual technology centres.
+      </p>
+      <p>
+        You can find my work at <a href="https://statusbrew.com/">Statusbrew</a> or
+        follow new essays through <a href="/rss.xml">RSS</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

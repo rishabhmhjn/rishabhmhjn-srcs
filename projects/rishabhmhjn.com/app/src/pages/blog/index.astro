@@ -1,0 +1,50 @@
+---
+import { getCollection } from 'astro:content';
+import PostList from '../../components/PostList.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { featuredPostIds, postPath, sortPosts } from '../../lib/posts';
+
+const posts = sortPosts(await getCollection('posts'));
+const startHere = featuredPostIds
+  .map((id) => posts.find((post) => post.id === id))
+  .filter((post) => post !== undefined);
+---
+
+<BaseLayout
+  title="Blog"
+  description="Writing about Statusbrew, software businesses, technology, and Amritsar."
+>
+  <header class="page-header">
+    <p class="eyebrow">Writing</p>
+    <h1>Notes on software, startups, and building from Amritsar.</h1>
+    <p>
+      Essays and practical notes from my work. Follow new posts through
+      <a href="/rss.xml">RSS</a>.
+    </p>
+  </header>
+
+  <section class="start-here">
+    <p class="section-label">Start here</p>
+    <ol>
+      {
+        startHere.map((post, index) => (
+          <li>
+            <span>0{index + 1}</span>
+            <a href={postPath(post)}>{post.data.title}</a>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="archive">
+    <div class="section-heading">
+      <div>
+        <p class="section-label">Archive</p>
+        <h2>All posts</h2>
+      </div>
+      <span>{posts.length} posts</span>
+    </div>
+    <PostList posts={posts} />
+  </section>
+</BaseLayout>
