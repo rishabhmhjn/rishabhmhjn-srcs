@@ -1,27 +1,29 @@
 ---
 title: "#100daysofcode Day 5: Shared styles in NX #Angular libraries"
 date: 2023-03-14
-description: "With another missed day in my challenge, I will work on packaging styles with a library and use them in our newly created Angular app. Angular app styles It is easier to serve or build styles inside your app with the default configurations. Once you scaffold an application, the styles are available at {projectRoot}/src/styles.scss. To […]"
+description: "Another missed day. Today I am packaging shared styles inside an Nx library, importing them into the new Angular app, and namespacing them so future libraries do not collide."
 tags: ["100daysofcode", "Angular", "Nx"]
 ---
 
-With another missed day in my challenge, I will work on packaging styles with a library and use them in our newly created Angular app.
+Another missed day.
+
+Today I am working on packaging styles inside a library and using them in the Angular app we created yesterday. The immediate change is small, but I want the structure to keep working when more libraries need to share variables, mixins, and component styles.
 
 ## Angular app styles
 
-It is easier to serve or build styles inside your app with the default configurations. Once you scaffold an application, the styles are available at `{projectRoot}/src/styles.scss`.
+An Angular application can serve its own styles with the default configuration. Once I scaffolded the application, its global styles were available at `{projectRoot}/src/styles.scss`.
 
-To test it out, let us serve our application.
+I started by serving the application:
 
 ```
 $ nx serve linkinbio
 ```
 
-Now, open [http://localhost:4200/](http://localhost:4200/) and you can see your app component.
+The app component was available at [http://localhost:4200/](http://localhost:4200/).
 
 ![Screenshot-2023-03-14-at-16.53.57](./assets/2023-03-14-100daysofcode-day-5-shared-styles-in-nx-angular-libraries-01.png)
 
-If we make a small change to our styles, we can see that in real-time in our app.
+I made a small change in `styles.scss` to confirm that the app picked it up in real time:
 
 ```
 /* styles.scss */
@@ -34,23 +36,19 @@ p {
 
 ![Screenshot-2023-03-14-at-16.56.07](./assets/2023-03-14-100daysofcode-day-5-shared-styles-in-nx-angular-libraries-02.png)
 
-Great. So our styling works.
+Good. The application styles were working.
 
 ## The problem
 
-This is good for a self-contained application.
+That setup is fine for a self-contained application. It becomes less useful once several libraries need the same variables, mixins, or component styles.
 
-However, in the case of large applications, there will be a requirement for sharing styles across your libraries and including them as part of the main application build process.
+I wanted those shared styles to live in the UI library and still be included in the main application build. That keeps the reusable UI decisions beside the reusable components instead of copying them into every application.
 
-Creating a shared UI library containing variables, mixins, and shared component-specific styles is helpful.
-
-So we will learn how to include styles from an NX library into our application.
-
-## Solution – sharing styles across NX libraries
+## Sharing styles from the Nx library
 
 ### Create styles
 
-Let’s create some styles in our ui-shared library at `libs/linkinbio/ui/shared/src/styles/linkinbio-ui-shared`
+I created the shared styles under `libs/linkinbio/ui/shared/src/styles/linkinbio-ui-shared`.
 
 ```
 /* libs/linkinbio/ui/shared/src/styles/linkinbio-ui-shared/_variables.scss */
@@ -66,11 +64,9 @@ p {
 }
 ```
 
-### Update app/project.json
+### Update the application configuration
 
-Now, let’s add the instructions to tell angular compiler to set `libs/linkinbio/ui/shared/src/styles` as one of the paths to look for for our new styles.
-
-To do that, we will add the following `stylePreprocessorOptions` property to `projects/linkinbio/project.json` file.
+Next, I added `libs/linkinbio/ui/shared/src/styles` to the Angular compiler's lookup paths through `stylePreprocessorOptions` in `projects/linkinbio/project.json`.
 
 ```
 {
@@ -86,7 +82,7 @@ To do that, we will add the following `stylePreprocessorOptions` property to `pr
 
 ### Import library styles
 
-Now, you can easily import the styles into your app:
+With that path configured, I could import the library styles from the application's `styles.scss`:
 
 ```
 /* styles.scss */
@@ -104,12 +100,12 @@ p {
 }
 ```
 
-You can see your styles applied in the browser.
+The styles were now applied in the browser:
 
 ![Screenshot-2023-03-14-at-17.28.17](./assets/2023-03-14-100daysofcode-day-5-shared-styles-in-nx-angular-libraries-03.png)
 
-It is important to note that I have added a distinct folder, `linkinbio-ui-shared`, inside the library styles folder. This is because, in the future, it is likely I will need to import styles from other libraries too.
+I deliberately added a `linkinbio-ui-shared` folder inside the library's styles folder. I will probably need to import styles from other libraries later, and generic filenames such as `_variables.scss` would otherwise collide.
 
-To ensure the names of the shared styles do not collide with one another, I have chosen to namespace them by putting them in their own unique project name.
+Using the project name as a namespace keeps those imports predictable.
 
-That’s it! Happy coding 🙂
+For now, the shared styles live with the library, the application can import them, and another library can follow the same structure without taking over the same names.

@@ -1,39 +1,35 @@
 ---
 title: Astro Blog with Nx Monorepo
 date: 2025-07-20
-description: "How I moved from WordPress to a markdown-powered blog using Astro, Starlight, and GitHub Actions"
+description: "I wanted a blog I could write from my tablet, keep inside my Nx workspace, and deploy without returning to WordPress. Astro, Starlight, Codespaces, and GitHub Actions got me there."
 tags: ["astro"]
 ---
 
-I had been thinking about migrating my WordPress blog into something more developer-oriented. WordPress is great — battle-tested, popular, and has a plugin for everything — but it’s not built for people like me who want full control over their content and workflow.
+I am writing this blog on my tablet!
 
-## ✅ My Wishlist
+That was one of the main reasons I wanted to move away from WordPress. It is battle-tested, popular, and has a plugin for almost everything, but I wanted more control over how I write, store, and publish my posts.
 
-What I really wanted was a blog system that would let me:
+The workflow I had in mind was straightforward:
 
-- ✍️ Write posts in Markdown
-- 🧳 Work comfortably from my tablet (via GitHub Mobile or Codespaces)
-- ⚙️ Build into static pages (fast + SEO-friendly)
-- 📚 Display posts in reverse chronological order like a traditional blog
-- 🚀 Deploy via CI (GitHub Actions) and host on GitHub Pages or similar tooling
+- write posts in Markdown
+- work from my tablet through GitHub Mobile or Codespaces
+- build the site into static pages
+- show posts in reverse chronological order
+- deploy through GitHub Actions
 
----
+I also wanted the blog to live beside my other projects instead of becoming another system to maintain.
 
-## 🚧 Enter Astro + Starlight
+## Choosing Astro and Starlight
 
-After evaluating a few static site generators, I chose [**Astro**](https://astro.build/), using the [**Starlight Rapide theme**](https://github.com/HiDeoo/starlight-theme-rapide). The reasons were simple:
+After looking at a few static site generators, I chose [Astro](https://astro.build/) with the [Starlight Rapide theme](https://github.com/HiDeoo/starlight-theme-rapide).
 
-- Fast static builds
-- Clean, minimal layout
-- Native Markdown support
-- Easy to host and maintain
-- Content collections for typed Markdown posts
+Astro gave me static builds and native Markdown support. Starlight gave me a clean layout without having to build the reading experience first. Content collections also meant the Markdown posts could have typed frontmatter instead of relying on loose conventions.
 
----
+The combination covered the parts I cared about while staying simple enough for me to understand and change.
 
-## 🧱 Keeping It Inside a Monorepo
+## Keeping it inside the Nx workspace
 
-I already had an Nx workspace (`rishabhmhjn-srcs`) where I plan to keep all my projects. I added the Astro blog as an app inside `apps/rishabhmhjn.com`.
+I already had an Nx workspace, `rishabhmhjn-srcs`, where I plan to keep my projects. I added the Astro blog as an application inside `apps/rishabhmhjn.com`.
 
 Each blog post lives under `src/content/blog/`, with frontmatter like:
 
@@ -47,31 +43,25 @@ tags: ["astro", "starter"]
 
 ```
 
-This setup makes it super easy to write and commit from anywhere — even on mobile.
+The important consequence is that a post is now just a Markdown file. I can edit it, commit it, and let the same repository handle the rest.
 
-## 🚀 CI/CD with GitHub Actions + Pages
+## Building and publishing
 
-I created a GitHub Actions workflow that builds the Astro site and deploys to GitHub Pages. The steps are simple:
+I created a GitHub Actions workflow that builds the Astro site and deploys it to GitHub Pages:
 
 1. Install dependencies
-2. Run astro build (wrapped in Nx)
+2. Run the Astro build through Nx
 3. Deploy `dist/projects/rishabhmhjn.com` using `peaceiris/actions-gh-pages`
 
-More at `.github/workflows/rishabhmhjn.com.yml`
-
+The workflow lives at `.github/workflows/rishabhmhjn.com.yml`.
 
 I verified my custom subdomain on GitHub by:
 
-- Adding a TXT record (_github-challenge-<username>)
-- Setting up a CNAME DNS record pointing astro.rishabhmhjn.com to rishabhmhjn.github.io
+- adding a TXT record, `_github-challenge-<username>`
+- pointing the `astro.rishabhmhjn.com` CNAME record to `rishabhmhjn.github.io`
 
+The site now lives at <https://astro.rishabhmhjn.com>.
 
-It now lives at <https://astro.rishabhmhjn.com> 🚀
-
-
-## ✍🏼 Actual part of writing
-
-I wanted to be able to perform some level of coding on my tablet and explore tools like codespaces. I am actually writing this blog on my tablet!
+This post is the first real test of the workflow. I wanted to do some level of coding from my tablet and explore tools like Codespaces. Now I can write the post, make the change, and publish from the same place.
 
 ![Codespaces on tablet](./assets/2025-07-20-codespaces-on-tablet.jpg)
-
