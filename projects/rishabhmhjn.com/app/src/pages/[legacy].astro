@@ -1,0 +1,14 @@
+---
+import { legacyPostSlugs } from '../../../legacy-blog-redirects.mjs';
+import { withBase } from '../lib/posts';
+
+export function getStaticPaths() {
+  return legacyPostSlugs.map((legacy) => ({
+    params: { legacy },
+    props: { legacy },
+  }));
+}
+
+const { legacy } = Astro.props;
+return Astro.redirect(withBase(`blog/${legacy}/`), 301);
+---

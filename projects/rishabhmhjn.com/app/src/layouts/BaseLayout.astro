@@ -1,0 +1,69 @@
+---
+import SiteHeader from '../components/SiteHeader.astro';
+import socialCard from '../assets/logo.png';
+import { withBase } from '../lib/posts';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+}
+
+const {
+  title = 'Rishabh Mahajan',
+  description = 'My work is focused on Statusbrew and helping build a stronger tech community in Amritsar.',
+  image,
+  type = 'website',
+} = Astro.props;
+const pageTitle = title === 'Rishabh Mahajan' ? title : `${title} — Rishabh Mahajan`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const socialImage = new URL(image ?? socialCard.src, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Rishabh Mahajan"
+      href={withBase('rss.xml')}
+    />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="site-shell">
+      <SiteHeader />
+      <main id="main-content">
+        <slot />
+      </main>
+      <footer class="site-footer">
+        <p>Rishabh Mahajan</p>
+        <div>
+          <a href="https://statusbrew.com/">Statusbrew</a>
+          <a href="https://twitter.com/rishabhmhjn">X</a>
+          <a href="https://github.com/rishabhmhjn">GitHub</a>
+          <a href="https://www.instagram.com/rishabhmhjn/">Instagram</a>
+          <a href={withBase('rss.xml')}>RSS</a>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

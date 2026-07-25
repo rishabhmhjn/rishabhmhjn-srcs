@@ -1,0 +1,20 @@
+---
+import { withBase } from '../lib/posts';
+
+const currentPath = Astro.url.pathname;
+const blogPath = withBase('blog/');
+---
+
+<header class="site-header">
+  <a class="wordmark" href={withBase()} aria-label="Rishabh Mahajan, home">
+    Rishabh Mahajan
+  </a>
+  <nav aria-label="Main navigation">
+    <a href={withBase('#about')}>About</a>
+    <a href={withBase('#now')}>Now</a>
+    <a href={blogPath} aria-current={currentPath.startsWith(blogPath) ? 'page' : undefined}>
+      Blog
+    </a>
+    <a href={withBase('rss.xml')}>RSS</a>
+  </nav>
+</header>

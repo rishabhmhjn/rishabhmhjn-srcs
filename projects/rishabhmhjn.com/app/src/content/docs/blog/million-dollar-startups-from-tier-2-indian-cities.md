@@ -17,7 +17,7 @@ While human loss is something (*and an emphatic something*) to reckon with, the 
 
 While some industries that relied on being physically available have taken the plunge (Hyperlocal Market Places, Retail, Travel & Tourism, Sports, etc.), some notable businesses have witnessed a growth curve during this period of crisis. It is not surprising to see that majority of those businesses are from Tech, specifically internet businesses.
 
-I would like to focus on a specific category of internet businesses – [SAAS](/blog/tags/saas/).
+I would like to focus on a specific category of internet businesses – [SAAS](../tags/saas/).
 
 ## What is SAAS?
 
@@ -73,7 +73,7 @@ As more consumers and businesses go online in India, many with their first expos
 
 ### Limitations of SAAS during COVID-19
 
-It is important to note that not all SAAS businesses may have seen a growth curve during the [COVID-19](/blog/tags/covid-19/) time due to the limitations imposed on the industries they support.
+It is important to note that not all SAAS businesses may have seen a growth curve during the [COVID-19](../tags/covid-19/) time due to the limitations imposed on the industries they support.
 
 A quick example will be [Petpooja](https://www.petpooja.com/), a SAAS startup that provides POS software to restaurants. As restaurants temporarily shut down, service providers to this industry, like Petpooja, might find it hard to acquire new customers or even retain the old ones.
 
