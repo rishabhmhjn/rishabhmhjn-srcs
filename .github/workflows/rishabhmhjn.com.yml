@@ -10,6 +10,12 @@ on:
       - main
     paths:
       - 'projects/rishabhmhjn.com/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'nx.json'
+      - 'tsconfig.json'
+      - 'tsconfig.base.json'
+      - '.github/workflows/rishabhmhjn.com.yml'
   workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
