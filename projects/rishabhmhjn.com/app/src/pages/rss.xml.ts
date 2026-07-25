@@ -1,5 +1,5 @@
 import { getCollection } from 'astro:content';
-import { excerpt, postPath, sortPosts } from '../lib/posts';
+import { excerpt, postPath, sortPosts, withBase } from '../lib/posts';
 
 const escapeXml = (value: string) =>
   value.replace(/[<>&'"]/g, (character) => {
@@ -15,6 +15,7 @@ const escapeXml = (value: string) =>
 
 export async function GET({ site }: { site: URL }) {
   const posts = sortPosts(await getCollection('posts'));
+  const homeUrl = new URL(withBase(), site);
   const items = posts
     .map((post) => {
       const url = new URL(postPath(post), site);
@@ -32,7 +33,7 @@ export async function GET({ site }: { site: URL }) {
 <rss version="2.0">
   <channel>
     <title>Rishabh Mahajan</title>
-    <link>${site}</link>
+    <link>${homeUrl}</link>
     <description>Writing about Statusbrew, software businesses, technology, and Amritsar.</description>
     ${items}
   </channel>

@@ -1,6 +1,7 @@
 ---
 import SiteHeader from '../components/SiteHeader.astro';
 import socialCard from '../assets/logo.png';
+import { withBase } from '../lib/posts';
 import '../styles/global.css';
 
 interface Props {
@@ -29,7 +30,12 @@ const socialImage = new URL(image ?? socialCard.src, Astro.site);
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" type="application/rss+xml" title="Rishabh Mahajan" href="/rss.xml" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Rishabh Mahajan"
+      href={withBase('rss.xml')}
+    />
     <meta property="og:type" content={type} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
@@ -52,9 +58,10 @@ const socialImage = new URL(image ?? socialCard.src, Astro.site);
         <p>Rishabh Mahajan</p>
         <div>
           <a href="https://statusbrew.com/">Statusbrew</a>
+          <a href="https://twitter.com/rishabhmhjn">X</a>
           <a href="https://github.com/rishabhmhjn">GitHub</a>
           <a href="https://www.instagram.com/rishabhmhjn/">Instagram</a>
-          <a href="/rss.xml">RSS</a>
+          <a href={withBase('rss.xml')}>RSS</a>
         </div>
       </footer>
     </div>

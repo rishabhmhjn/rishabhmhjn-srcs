@@ -2,11 +2,23 @@ import type { CollectionEntry } from 'astro:content';
 
 export type Post = CollectionEntry<'posts'>;
 
+const baseUrl = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+
 export const featuredPostIds = [
   'ai-has-democratized-the-how',
   'amritsar-startup-manifesto',
   'million-dollar-startups-from-tier-2-indian-cities',
 ];
+
+export function withBase(path = '') {
+  if (path.startsWith('#')) {
+    return `${baseUrl}${path}`;
+  }
+
+  return `${baseUrl}${path.replace(/^\/+/, '')}`;
+}
 
 export function sortPosts(posts: Post[]) {
   return [...posts]
@@ -15,7 +27,7 @@ export function sortPosts(posts: Post[]) {
 }
 
 export function postPath(post: Post) {
-  return `/blog/${post.id}/`;
+  return withBase(`blog/${post.id}/`);
 }
 
 export function excerpt(description: string, length = 220) {

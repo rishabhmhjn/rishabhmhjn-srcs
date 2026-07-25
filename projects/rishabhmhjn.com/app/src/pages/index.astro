@@ -2,7 +2,13 @@
 import { getCollection } from 'astro:content';
 import PostList from '../components/PostList.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { excerpt, featuredPostIds, postPath, sortPosts } from '../lib/posts';
+import {
+  excerpt,
+  featuredPostIds,
+  postPath,
+  sortPosts,
+  withBase,
+} from '../lib/posts';
 
 const posts = sortPosts(await getCollection('posts'));
 const featuredPosts = featuredPostIds
@@ -16,7 +22,7 @@ const latestPosts = posts.slice(0, 5);
     <p class="eyebrow">Rishabh Mahajan</p>
     <h1>My work is focused on Statusbrew and helping build a stronger tech community in Amritsar.</h1>
     <div class="hero-links">
-      <a class="button" href="/blog/">Read the blog</a>
+      <a class="button" href={withBase('blog/')}>Read the blog</a>
       <a href="https://statusbrew.com/">Statusbrew ↗</a>
     </div>
   </section>
@@ -41,7 +47,7 @@ const latestPosts = posts.slice(0, 5);
         <p class="section-label">Start here</p>
         <h2>Selected writing</h2>
       </div>
-      <a href="/blog/">All writing →</a>
+      <a href={withBase('blog/')}>All writing →</a>
     </div>
     <div class="featured-grid">
       {
@@ -62,7 +68,7 @@ const latestPosts = posts.slice(0, 5);
         <p class="section-label">Latest</p>
         <h2>Recent posts</h2>
       </div>
-      <a href="/rss.xml">Follow via RSS →</a>
+      <a href={withBase('rss.xml')}>Follow via RSS →</a>
     </div>
     <PostList posts={latestPosts} compact />
   </section>
@@ -80,7 +86,7 @@ const latestPosts = posts.slice(0, 5);
       </p>
       <p>
         You can find my work at <a href="https://statusbrew.com/">Statusbrew</a> or
-        follow new essays through <a href="/rss.xml">RSS</a>.
+        follow new essays through <a href={withBase('rss.xml')}>RSS</a>.
       </p>
     </div>
   </section>

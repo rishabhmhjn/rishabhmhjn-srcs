@@ -8,6 +8,7 @@ import {
   readingTime,
   slugifyTag,
   sortPosts,
+  withBase,
   type Post,
 } from '../../lib/posts';
 
@@ -50,7 +51,7 @@ const showToc = headings.filter((heading) => heading.depth === 2).length >= 4;
 >
   <article class="post">
     <header class="post-header">
-      <a class="back-link" href="/blog/">← All writing</a>
+      <a class="back-link" href={withBase('blog/')}>← All writing</a>
       <h1>{post.data.title}</h1>
       <p class="post-deck">{excerpt(post.data.description, 300)}</p>
       <div class="post-byline">
@@ -62,7 +63,7 @@ const showToc = headings.filter((heading) => heading.depth === 2).length >= 4;
         post.data.tags.length > 0 && (
           <ul class="tag-list" aria-label="Topics">
             {post.data.tags.map((tag) => (
-              <li><a href={`/blog/tags/${slugifyTag(tag)}/`}>{tag}</a></li>
+              <li><a href={withBase(`blog/tags/${slugifyTag(tag)}/`)}>{tag}</a></li>
             ))}
           </ul>
         )
@@ -101,7 +102,7 @@ const showToc = headings.filter((heading) => heading.depth === 2).length >= 4;
           </a>
         ))
       }
-      <a href="/blog/">
+      <a href={withBase('blog/')}>
         <span>Archive</span>
         <strong>Browse all writing →</strong>
       </a>

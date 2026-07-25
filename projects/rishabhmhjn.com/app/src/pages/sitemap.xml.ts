@@ -1,16 +1,21 @@
 import { getCollection } from 'astro:content';
-import { postPath, slugifyTag, sortPosts } from '../lib/posts';
+import { postPath, slugifyTag, sortPosts, withBase } from '../lib/posts';
 
 export async function GET({ site }: { site: URL }) {
   const posts = sortPosts(await getCollection('posts'));
   const tagPaths = [
     ...new Set(
       posts.flatMap((post) =>
-        post.data.tags.map((tag) => `/blog/tags/${slugifyTag(tag)}/`),
+        post.data.tags.map((tag) => withBase(`blog/tags/${slugifyTag(tag)}/`)),
       ),
     ),
   ];
-  const paths = ['/', '/blog/', ...posts.map(postPath), ...tagPaths];
+  const paths = [
+    withBase(),
+    withBase('blog/'),
+    ...posts.map(postPath),
+    ...tagPaths,
+  ];
   const urls = paths
     .map((path) => `<url><loc>${new URL(path, site)}</loc></url>`)
     .join('');

@@ -2,7 +2,12 @@
 import { getCollection } from 'astro:content';
 import PostList from '../../components/PostList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { featuredPostIds, postPath, sortPosts } from '../../lib/posts';
+import {
+  featuredPostIds,
+  postPath,
+  sortPosts,
+  withBase,
+} from '../../lib/posts';
 
 const posts = sortPosts(await getCollection('posts'));
 const startHere = featuredPostIds
@@ -19,7 +24,7 @@ const startHere = featuredPostIds
     <h1>Notes on software, startups, and building from Amritsar.</h1>
     <p>
       Essays and practical notes from my work. Follow new posts through
-      <a href="/rss.xml">RSS</a>.
+      <a href={withBase('rss.xml')}>RSS</a>.
     </p>
   </header>
 

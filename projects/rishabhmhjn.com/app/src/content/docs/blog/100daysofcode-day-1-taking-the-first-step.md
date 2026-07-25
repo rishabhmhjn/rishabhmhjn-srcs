@@ -17,7 +17,7 @@ I have been going over this for long, and it is high time I do this. Rephrasing,
 
 I have been a developer for most of the last 13 years. I have built tools and libraries consumed primarily internally at my company, [Statusbrew](https://statusbrew.com/).
 
-I used to be active in building [communities](/blog/tags/amritsar-startups/) of creators, developers, and startup/small business owners in my [home city](/blog/tags/amritsar/). I had many occasions to meet new people and share knowledge with them. We were also covered frequently by the local press. Many people in our city knew about us and were following our work.
+I used to be active in building [communities](../tags/amritsar-startups/) of creators, developers, and startup/small business owners in my [home city](../tags/amritsar/). I had many occasions to meet new people and share knowledge with them. We were also covered frequently by the local press. Many people in our city knew about us and were following our work.
 
 After the pandemic started, I passed on the opportunity to become active in the social space as I focused on sales and revamping our web and mobile applications. It’s been nearly 2 years since I also gave up even on talking to my own customers and delved deeper into coding behind my work desk. That closed work focus was the need of the time, but now most of the hard work is done.
 

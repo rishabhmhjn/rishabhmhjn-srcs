@@ -1,4 +1,4 @@
-const legacyPostSlugs = [
+export const legacyPostSlugs = [
   '100daysofcode-day-1-taking-the-first-step',
   '100daysofcode-day-2-nx-monorepo',
   '100daysofcode-day-3-shared-eslint-plugin',
@@ -16,5 +16,5 @@ const legacyPostSlugs = [
 ];
 
 export const legacyBlogRedirects = Object.fromEntries(
-  legacyPostSlugs.map((slug) => [`/${slug}/`, `/blog/${slug}/`])
+  legacyPostSlugs.map((slug) => [`/${slug}/`, `/blog/${slug}/`]),
 );

@@ -1,11 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../lib/posts';
 ---
 
 <BaseLayout title="Page not found" description="The requested page could not be found.">
   <section class="page-header">
     <p class="eyebrow">404</p>
     <h1>That page is not here.</h1>
-    <p>Return to the <a href="/">landing page</a> or browse the <a href="/blog/">blog</a>.</p>
+    <p>
+      Return to the <a href={withBase()}>landing page</a> or browse the
+      <a href={withBase('blog/')}>blog</a>.
+    </p>
   </section>
 </BaseLayout>

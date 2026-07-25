@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import PostList from '../../../components/PostList.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import { slugifyTag, sortPosts } from '../../../lib/posts';
+import { slugifyTag, sortPosts, withBase } from '../../../lib/posts';
 
 export async function getStaticPaths() {
   const posts = sortPosts(await getCollection('posts'));
@@ -27,7 +27,7 @@ const { tag, posts } = Astro.props;
 
 <BaseLayout title={tag} description={`Posts filed under ${tag}.`}>
   <header class="page-header compact-header">
-    <a class="back-link" href="/blog/">← All writing</a>
+    <a class="back-link" href={withBase('blog/')}>← All writing</a>
     <p class="eyebrow">Topic</p>
     <h1>{tag}</h1>
     <p>{posts.length} {posts.length === 1 ? 'post' : 'posts'}</p>
