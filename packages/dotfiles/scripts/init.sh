@@ -24,7 +24,7 @@ if [ "${DOTFILES_WITH_OH_MY_ZSH:-0}" = 1 ] &&
   if [ ! -r "$HOME/.oh-my-zsh/oh-my-zsh.sh" ]; then
     git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
   fi
-  p10k_dir="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+  p10k_dir="$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
   if [ ! -r "$p10k_dir/powerlevel10k.zsh-theme" ]; then
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$p10k_dir"
   fi
@@ -99,12 +99,20 @@ fi
 omz_block=""
 if [ "$enable_omz" = 1 ]; then
   omz_block='# Load Oh My Zsh before the dotfiles plugins.
-if (( ! $+functions[omz] )) && [[ -r "${ZSH:-$HOME/.oh-my-zsh}/oh-my-zsh.sh" ]]; then
+if (( ! $+functions[omz] )); then
   export ZSH="${ZSH:-$HOME/.oh-my-zsh}"
+  if [[ ! -r "$ZSH/oh-my-zsh.sh" ]]; then
+    export ZSH="$HOME/.oh-my-zsh"
+  fi
   if [[ -r "${ZSH_CUSTOM:-$ZSH/custom}/themes/powerlevel10k/powerlevel10k.zsh-theme" ]]; then
     : "${ZSH_THEME=powerlevel10k/powerlevel10k}"
   fi
   source "$ZSH/oh-my-zsh.sh"
+  # A custom Oh My Zsh tree can use the theme installed by this installer.
+  if [[ ! -v ZSH_THEME && -r "$HOME/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme" ]]; then
+    ZSH_THEME=powerlevel10k/powerlevel10k
+    source "$HOME/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme"
+  fi
   if (( $+functions[p10k] )); then
     if [[ -r "$HOME/.p10k.zsh" ]]; then
       source "$HOME/.p10k.zsh"
