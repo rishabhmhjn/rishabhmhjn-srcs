@@ -43,19 +43,17 @@ npm run init
 2. Copies `vendors/*` into `~/.dotfiles/releases/{timestamp}/plugins/`
 3. Points `~/.dotfiles/current` → that release (symlink)
 4. Appends native include directives to your `$HOME` config files (idempotent):
+   - `~/.zshrc` — initializes Zsh completion, then sources `~/.dotfiles/current/.dotfilerc`.
+     If the source line from the old manual setup is already present, the installer adds completion initialization before it.
    - `~/.gitconfig` — `[include] path = ~/.dotfiles/current/.gitconfig`
    - `~/.vimrc` — `source ~/.dotfiles/current/.vimrc`
    - `~/.tmux.conf` — `source-file ~/.dotfiles/current/.tmux.conf`
 
 > `.gitignore` is wired automatically via `core.excludesFile` inside `.gitconfig` — no separate `$HOME` entry needed.
 
-### After init (one-time manual step)
+### After init
 
-Add to your `~/.zshrc`:
-
-```bash
-source ~/.dotfiles/current/.dotfilerc
-```
+Open a new terminal or run `exec zsh` to activate the shell configuration.
 
 This sources aliases, functions, and sets up PATH, history, locale, editor, rbenv/rvm.
 

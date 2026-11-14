@@ -65,6 +65,38 @@ append_if_missing() {
 echo ""
 echo "==> Wiring tool configs via native includes..."
 
+# Nx completion needs compdef before the dotfiles load its plugin.
+zshrc="$HOME/.zshrc"
+zsh_source='source ~/.dotfiles/current/.dotfilerc'
+zsh_marker='# Added by @rishabhmhjn/dotfiles'
+zsh_init='if (( ! $+functions[compdef] )); then
+  autoload -Uz compinit
+  compinit
+fi'
+if grep -qxF "$zsh_source" "$zshrc" 2>/dev/null &&
+   ! grep -qxF "$zsh_marker" "$zshrc"; then
+  # Upgrade the source line from the old manual setup in place.
+  updated_zshrc=$(ZSH_INIT="$zsh_init" awk -v source_line="$zsh_source" -v marker="$zsh_marker" '
+    $0 == source_line && !updated {
+      print marker
+      print ENVIRON["ZSH_INIT"]
+      updated = 1
+    }
+    { print }
+    END { printf "." }
+  ' "$zshrc")
+  # The sentinel keeps command substitution from stripping trailing blank lines.
+  printf '%s' "${updated_zshrc%.}" > "$zshrc"
+  echo "    Updated: $zshrc"
+else
+  append_if_missing \
+    "$zshrc" \
+    "$zsh_marker" \
+    "$zsh_marker
+$zsh_init
+$zsh_source"
+fi
+
 # gitconfig — git [include] (gitignore handled via core.excludesFile inside managed gitconfig)
 append_if_missing \
   "$HOME/.gitconfig" \
@@ -90,9 +122,7 @@ source-file ~/.dotfiles/current/.tmux.conf"
 echo ""
 echo "Done! Dotfiles installed from release $TIMESTAMP."
 echo ""
-echo "To activate shell dotfiles, add this to your ~/.zshrc or ~/.zprofile:"
-echo ""
-echo "  source ~/.dotfiles/current/.dotfilerc"
+echo "Open a new terminal or run 'exec zsh' to activate the shell dotfiles."
 echo ""
 echo "To roll back to a previous release, re-point the current symlink:"
 echo ""
