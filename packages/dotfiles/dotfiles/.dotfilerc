@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # dotfilerc - Entry point for shell dotfiles.
-# Add this line to your ~/.zshrc or ~/.zprofile:
-#   source ~/.dotfiles/current/.dotfilerc
+# The installer sources this from ~/.zshrc after initializing completion.
 
 DOTFILES="$HOME/.dotfiles/current"
 

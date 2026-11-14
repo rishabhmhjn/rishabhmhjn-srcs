@@ -14,6 +14,21 @@ VENDORS_SOURCE="$SCRIPT_DIR/../vendors"
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 RELEASE_DIR="$HOME/.dotfiles/releases/$TIMESTAMP"
 CURRENT_LINK="$HOME/.dotfiles/current"
+zshrc="$HOME/.zshrc"
+omz_source_pattern='^[[:space:]]*(source|\.)[[:space:]]+[^#]*oh-my-zsh\.sh'
+
+enable_omz=0
+if [ "${DOTFILES_WITH_OH_MY_ZSH:-0}" = 1 ] &&
+   ! grep -Eq "$omz_source_pattern" "$zshrc" 2>/dev/null; then
+  enable_omz=1
+  if [ ! -r "$HOME/.oh-my-zsh/oh-my-zsh.sh" ]; then
+    git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
+  fi
+  p10k_dir="$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
+  if [ ! -r "$p10k_dir/powerlevel10k.zsh-theme" ]; then
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$p10k_dir"
+  fi
+fi
 
 echo "==> Creating release: $RELEASE_DIR"
 mkdir -p "$RELEASE_DIR"
@@ -65,6 +80,73 @@ append_if_missing() {
 echo ""
 echo "==> Wiring tool configs via native includes..."
 
+# Nx completion needs compdef before the dotfiles load its plugin.
+zsh_source='source ~/.dotfiles/current/.dotfilerc'
+zsh_marker='# Added by @rishabhmhjn/dotfiles'
+zsh_init='if (( ! $+functions[compdef] )); then
+  autoload -Uz compinit
+  compinit
+fi'
+zsh_block="$zsh_marker
+$zsh_init"
+insertion_line="$zsh_source"
+if grep -qxF "$zsh_marker" "$zshrc" 2>/dev/null; then
+  zsh_block=""
+  insertion_line="$zsh_marker"
+fi
+
+# Let Oh My Zsh initialize completion before Nx registers its completion function.
+omz_block=""
+if [ "$enable_omz" = 1 ]; then
+  omz_block='# Load Oh My Zsh before the dotfiles plugins.
+if (( ! $+functions[omz] )); then
+  export ZSH="${ZSH:-$HOME/.oh-my-zsh}"
+  if [[ ! -r "$ZSH/oh-my-zsh.sh" ]]; then
+    export ZSH="$HOME/.oh-my-zsh"
+  fi
+  if [[ -r "${ZSH_CUSTOM:-$ZSH/custom}/themes/powerlevel10k/powerlevel10k.zsh-theme" ]]; then
+    : "${ZSH_THEME=powerlevel10k/powerlevel10k}"
+  fi
+  source "$ZSH/oh-my-zsh.sh"
+  # A custom Oh My Zsh tree can use the theme installed by this installer.
+  if [[ ! -v ZSH_THEME && -r "$HOME/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme" ]]; then
+    ZSH_THEME=powerlevel10k/powerlevel10k
+    source "$HOME/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme"
+  fi
+  if (( $+functions[p10k] )); then
+    if [[ -r "$HOME/.p10k.zsh" ]]; then
+      source "$HOME/.p10k.zsh"
+    elif [[ -r "$HOME/.dotfiles/current/.p10k.zsh" ]]; then
+      source "$HOME/.dotfiles/current/.p10k.zsh"
+    fi
+  fi
+fi'
+fi
+if [ -n "$omz_block" ]; then
+  zsh_block="$omz_block${zsh_block:+
+$zsh_block}"
+fi
+
+if [ -n "$zsh_block" ] && grep -qxF "$insertion_line" "$zshrc" 2>/dev/null; then
+  updated_zshrc=$(ZSH_BLOCK="$zsh_block" awk -v insertion_line="$insertion_line" '
+    $0 == insertion_line && !updated {
+      print ENVIRON["ZSH_BLOCK"]
+      updated = 1
+    }
+    { print }
+    END { printf "." }
+  ' "$zshrc")
+  # The sentinel keeps command substitution from stripping trailing blank lines.
+  printf '%s' "${updated_zshrc%.}" > "$zshrc"
+  echo "    Updated: $zshrc"
+elif [ -n "$zsh_block" ]; then
+  append_if_missing \
+    "$zshrc" \
+    "$zsh_marker" \
+    "$zsh_block
+$zsh_source"
+fi
+
 # gitconfig — git [include] (gitignore handled via core.excludesFile inside managed gitconfig)
 append_if_missing \
   "$HOME/.gitconfig" \
@@ -90,9 +172,7 @@ source-file ~/.dotfiles/current/.tmux.conf"
 echo ""
 echo "Done! Dotfiles installed from release $TIMESTAMP."
 echo ""
-echo "To activate shell dotfiles, add this to your ~/.zshrc or ~/.zprofile:"
-echo ""
-echo "  source ~/.dotfiles/current/.dotfilerc"
+echo "Open a new terminal or run 'exec zsh' to activate the shell dotfiles."
 echo ""
 echo "To roll back to a previous release, re-point the current symlink:"
 echo ""

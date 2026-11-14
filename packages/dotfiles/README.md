@@ -43,23 +43,37 @@ npm run init
 2. Copies `vendors/*` into `~/.dotfiles/releases/{timestamp}/plugins/`
 3. Points `~/.dotfiles/current` → that release (symlink)
 4. Appends native include directives to your `$HOME` config files (idempotent):
+   - `~/.zshrc` — initializes Zsh completion, then sources `~/.dotfiles/current/.dotfilerc`.
+     If the source line from the old manual setup is already present, the installer adds completion initialization before it.
    - `~/.gitconfig` — `[include] path = ~/.dotfiles/current/.gitconfig`
    - `~/.vimrc` — `source ~/.dotfiles/current/.vimrc`
    - `~/.tmux.conf` — `source-file ~/.dotfiles/current/.tmux.conf`
 
 > `.gitignore` is wired automatically via `core.excludesFile` inside `.gitconfig` — no separate `$HOME` entry needed.
 
-### After init (one-time manual step)
+### After init
 
-Add to your `~/.zshrc`:
-
-```bash
-source ~/.dotfiles/current/.dotfilerc
-```
+Open a new terminal or run `exec zsh` to activate the shell configuration.
 
 This sources aliases, functions, and sets up PATH, history, locale, editor, rbenv/rvm.
 
 It also sources `~/.dotfiles/current/.zsh-plugins`, where plugins are loaded from `~/.dotfiles/current/plugins/<name>/...`.
+
+### Optional Oh My Zsh setup
+
+Run from the repository root to install and enable Oh My Zsh with Powerlevel10k:
+
+```bash
+DOTFILES_WITH_OH_MY_ZSH=1 bash packages/dotfiles/scripts/init.sh
+```
+
+The installer reuses `~/.oh-my-zsh` if present and preserves existing Oh My Zsh
+configuration. For a new setup it loads Oh My Zsh before the dotfiles plugins
+and selects Powerlevel10k if `ZSH_THEME` is unset. With Powerlevel10k active,
+it loads your existing `~/.p10k.zsh` if present, or the saved prompt from the
+current dotfiles release. The installer leaves your plugin list intact, and the
+dotfiles still load autosuggestions, Nx completion, and syntax highlighting.
+Run without the environment variable for the standard dotfiles installation.
 
 ## Managing zsh plugins
 
