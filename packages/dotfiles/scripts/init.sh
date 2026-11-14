@@ -14,6 +14,21 @@ VENDORS_SOURCE="$SCRIPT_DIR/../vendors"
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 RELEASE_DIR="$HOME/.dotfiles/releases/$TIMESTAMP"
 CURRENT_LINK="$HOME/.dotfiles/current"
+zshrc="$HOME/.zshrc"
+omz_source_pattern='^[[:space:]]*(source|\.)[[:space:]]+[^#]*oh-my-zsh\.sh'
+
+enable_omz=0
+if [ "${DOTFILES_WITH_OH_MY_ZSH:-0}" = 1 ] &&
+   ! grep -Eq "$omz_source_pattern" "$zshrc" 2>/dev/null; then
+  enable_omz=1
+  if [ ! -r "$HOME/.oh-my-zsh/oh-my-zsh.sh" ]; then
+    git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
+  fi
+  p10k_dir="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+  if [ ! -r "$p10k_dir/powerlevel10k.zsh-theme" ]; then
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$p10k_dir"
+  fi
+fi
 
 echo "==> Creating release: $RELEASE_DIR"
 mkdir -p "$RELEASE_DIR"
@@ -66,20 +81,48 @@ echo ""
 echo "==> Wiring tool configs via native includes..."
 
 # Nx completion needs compdef before the dotfiles load its plugin.
-zshrc="$HOME/.zshrc"
 zsh_source='source ~/.dotfiles/current/.dotfilerc'
 zsh_marker='# Added by @rishabhmhjn/dotfiles'
 zsh_init='if (( ! $+functions[compdef] )); then
   autoload -Uz compinit
   compinit
 fi'
-if grep -qxF "$zsh_source" "$zshrc" 2>/dev/null &&
-   ! grep -qxF "$zsh_marker" "$zshrc"; then
-  # Upgrade the source line from the old manual setup in place.
-  updated_zshrc=$(ZSH_INIT="$zsh_init" awk -v source_line="$zsh_source" -v marker="$zsh_marker" '
-    $0 == source_line && !updated {
-      print marker
-      print ENVIRON["ZSH_INIT"]
+zsh_block="$zsh_marker
+$zsh_init"
+insertion_line="$zsh_source"
+if grep -qxF "$zsh_marker" "$zshrc" 2>/dev/null; then
+  zsh_block=""
+  insertion_line="$zsh_marker"
+fi
+
+# Let Oh My Zsh initialize completion before Nx registers its completion function.
+omz_block=""
+if [ "$enable_omz" = 1 ]; then
+  omz_block='# Load Oh My Zsh before the dotfiles plugins.
+if (( ! $+functions[omz] )) && [[ -r "${ZSH:-$HOME/.oh-my-zsh}/oh-my-zsh.sh" ]]; then
+  export ZSH="${ZSH:-$HOME/.oh-my-zsh}"
+  if [[ -r "${ZSH_CUSTOM:-$ZSH/custom}/themes/powerlevel10k/powerlevel10k.zsh-theme" ]]; then
+    : "${ZSH_THEME=powerlevel10k/powerlevel10k}"
+  fi
+  source "$ZSH/oh-my-zsh.sh"
+  if (( $+functions[p10k] )); then
+    if [[ -r "$HOME/.p10k.zsh" ]]; then
+      source "$HOME/.p10k.zsh"
+    elif [[ -r "$HOME/.dotfiles/current/.p10k.zsh" ]]; then
+      source "$HOME/.dotfiles/current/.p10k.zsh"
+    fi
+  fi
+fi'
+fi
+if [ -n "$omz_block" ]; then
+  zsh_block="$omz_block${zsh_block:+
+$zsh_block}"
+fi
+
+if [ -n "$zsh_block" ] && grep -qxF "$insertion_line" "$zshrc" 2>/dev/null; then
+  updated_zshrc=$(ZSH_BLOCK="$zsh_block" awk -v insertion_line="$insertion_line" '
+    $0 == insertion_line && !updated {
+      print ENVIRON["ZSH_BLOCK"]
       updated = 1
     }
     { print }
@@ -88,12 +131,11 @@ if grep -qxF "$zsh_source" "$zshrc" 2>/dev/null &&
   # The sentinel keeps command substitution from stripping trailing blank lines.
   printf '%s' "${updated_zshrc%.}" > "$zshrc"
   echo "    Updated: $zshrc"
-else
+elif [ -n "$zsh_block" ]; then
   append_if_missing \
     "$zshrc" \
     "$zsh_marker" \
-    "$zsh_marker
-$zsh_init
+    "$zsh_block
 $zsh_source"
 fi
 
